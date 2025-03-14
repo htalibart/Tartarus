@@ -201,7 +201,7 @@ def generate_unique_file_name(base_name, extension):
 	return file_name
 
 
-def perform_calc_single(smi, receptor_type, docking_program='qvina'): 
+def perform_calc_single(smi, receptor_type, docking_program='qvina', filter_molecules=True): 
 	"""
 	Performs docking calculations on a single molecule-receptor pair.
 	
@@ -237,10 +237,10 @@ def perform_calc_single(smi, receptor_type, docking_program='qvina'):
 	created during the execution are deleted before the function returns.
 	"""
 	try: 
-	
-		pass_filt =  process_molecule(smi)
-		if pass_filt[1] == 'Fail': 
-			return 10**4
+		if filter_molecules:
+			pass_filt =  process_molecule(smi)
+			if pass_filt[1] == 'Fail': 
+				return 10**4
 	
 		output_filename = generate_unique_file_name('lig', 'pdbqt')
 		# print('smi: {} fname: {}'.format(smi, output_filename))
