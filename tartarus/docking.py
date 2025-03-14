@@ -114,6 +114,7 @@ def run_docking_4lde(lig_location, out_location, method='qvina'):
         
     # Obtain the docking score: 
     command_run = command_run.stdout.decode("utf-8").split('\n')
+	print(command_run)
 
     docking_score = []
     for item in command_run: 
