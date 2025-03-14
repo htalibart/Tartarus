@@ -25,7 +25,7 @@ SMINA_CMD = "{}".format(data_dir/'smina')
 
 
 def get_structure_file(receptor_name):
-	return str(docking_structures_dir/receptor_name)
+	return str(docking_structures_dir/receptor_name/'prot.pdbqt')
 
 
 def check_energy(lig_): 
@@ -117,6 +117,7 @@ def run_docking_4lde(lig_location, out_location, method='qvina'):
 		command_run = subprocess.run([QVINA_CMD, "--receptor", get_structure_file('4lde'), "--ligand", lig_location, "--center_x", "-2.942962976793448", "--center_y", "-12.915592617458767", "--center_z", "-50.99233344749168", "--size_x", "20", "--size_y", "20", "--size_z", "20", "--exhaustiveness", "10", "--out", out_location], capture_output=True)
 	elif method == 'smina': 
 		command_run = subprocess.run([SMINA_CMD, "--receptor", get_structure_file('4lde'), "--ligand", lig_location, "--center_x", "-2.942962976793448", "--center_y", "-12.915592617458767", "--center_z", "-50.99233344749168", "--size_x", "20", "--size_y", "20", "--size_z", "20", "--exhaustiveness", "100", "--out", out_location], capture_output=True)
+		print(" ".join([SMINA_CMD, "--receptor", get_structure_file('4lde'), "--ligand", lig_location, "--center_x", "-2.942962976793448", "--center_y", "-12.915592617458767", "--center_z", "-50.99233344749168", "--size_x", "20", "--size_y", "20", "--size_z", "20", "--exhaustiveness", "100", "--out", out_location]))
 	else: 
 		raise Exception('Possible docking softwares: qvina/smina')
 	
@@ -127,6 +128,7 @@ def run_docking_4lde(lig_location, out_location, method='qvina'):
 		return 10000
 		
 	# Obtain the docking score: 
+	print(command_run.stdout.decode('utf-8'))
 	command_run = command_run.stdout.decode("utf-8").split('\n')
 
 	docking_score = []
