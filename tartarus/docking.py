@@ -13,6 +13,7 @@ import itertools
 import argparse
 import multiprocessing
 import pathlib
+import tempfile
 
 from .filter_ import process_molecule 
 
@@ -195,10 +196,8 @@ def run_docking_6y2f(lig_location, out_location, method='qvina'):
 
 
 def generate_unique_file_name(base_name, extension):
-	timestamp = int(time.time() * 1000)
-	unique_id = uuid.uuid4().hex
-	file_name = f"{base_name}_{timestamp}_{unique_id}.{extension}"
-	return file_name
+	tmp_file = tempfile.NamedTemporaryFile(prefix=base_name, suffix='.{}'.format(extension))
+	return tmp_file.name
 
 
 def perform_calc_single(smi, receptor_type, docking_program='qvina', filter_molecules=True): 
