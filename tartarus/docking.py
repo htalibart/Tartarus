@@ -30,7 +30,8 @@ def check_energy(lig_):
         command_obabel_check = subprocess.run(ob_cmd, capture_output=True)
         command_obabel_check = command_obabel_check.stdout.decode("utf-8").split('\n')[-2]
         total_energy         = float(command_obabel_check.split(' ')[-2])
-    except: 
+    except Exception as e:
+		print(e)
         total_energy = 10000 # Calculation has failed. 
         
     return total_energy
