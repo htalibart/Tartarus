@@ -5,6 +5,8 @@ eval "$(conda shell.bash hook)"
 conda create -n tartarus -y
 conda activate tartarus
 
+conda install python=3.8 -y
+
 # tartarus stuff
 conda install -c pytorch pytorch -y
 conda install -c conda-forge rdkit openbabel -y
