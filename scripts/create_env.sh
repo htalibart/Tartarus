@@ -32,3 +32,5 @@ pip install selfies pandas scikit-learn pyarrow fastparquet rdkit chembl_structu
 cd /home/hugo/chembed
 pip install .
 cd -
+
+pip install .
