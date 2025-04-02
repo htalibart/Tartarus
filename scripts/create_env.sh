@@ -12,6 +12,7 @@ conda install -c pytorch pytorch -y
 conda install -c conda-forge rdkit openbabel -y
 
 conda install -c conda-forge xtb-python -y
+conda install xtb==6.3.3 -y
 conda install -c conda-forge crest -y
 export XTBHOME=$CONDA_PREFIX
 source $CONDA_PREFIX/share/xtb/config_env.bash
