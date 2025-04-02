@@ -303,6 +303,7 @@ def get_properties(smi: str, verbose: bool=False, scratch='/tmp'):
             st, osc, combined = -results_[1], results_[2], results_[2]-results_[1]-np.abs(results_[0]-3.2)
             
     except: 
+		print("Properties computation failed")
         st, osc, combined = -10**4, -10**4, -10**4
 
     # Remove temporary directory
