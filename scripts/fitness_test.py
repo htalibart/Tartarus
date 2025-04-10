@@ -8,6 +8,8 @@ from chembed.downstream import optimizer as chembed_optimizer
 
 from tartarus import tadf
 
+import time
+
 def fitness_st_value(smiles):
 	st, osc, combined = tadf.get_properties(smiles)
 	return st
@@ -22,4 +24,7 @@ def check_fitness_ok():
 
 
 if __name__=="__main__":
+	start = time.time()
 	check_fitness_ok()
+	end = time.time()
+	print("Total time:", end-start)
