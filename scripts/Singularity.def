@@ -1,0 +1,61 @@
+Bootstrap: docker
+From: continuumio/miniconda3:latest
+
+%post
+    apt-get update -y && apt-get upgrade -y
+
+    # Set up bash for conda
+    conda init bash
+
+    # Create working dir and move into it
+    mkdir -p /benchmark
+    cd /benchmark
+
+
+	# create conda environment
+	eval "$(conda shell.bash hook)"
+	conda create -n tartarus_chembed -y
+	conda activate tartarus_chembed
+	conda install python=3.8 -y
+	conda install -c pytorch pytorch -y
+	conda install -c conda-forge rdkit openbabel -y
+	conda install -c conda-forge xtb-python -y
+	conda install xtb==6.3.3 -y
+	conda install -c conda-forge crest -y
+
+    # XTB env setup
+	bash -c "source $CONDA_PREFIX/share/xtb/config_env.bash"
+	mkdir -p /opt/conda/envs/tartarus_chembed/etc/conda/activate.d/
+
+	ENV_VARS_FILE=${CONDA_PREFIX}/etc/conda/activate.d/env_vars.sh
+	echo "export XTBHOME=\$CONDA_PREFIX" >> $ENV_VARS_FILE
+	#echo "source \$CONDA_PREFIX/share/xtb/config_env.bash" >> $ENV_VARS_FILE
+
+	# install additional packages
+	pip install --upgrade pip
+	pip install numpy
+	pip install pyscf morfeus-ml
+	pip install h5py scikit-learn geometric pyberny loguru wurlitzer sqlalchemy
+	pip install -i https://test.pypi.org/simple/ geodesic-interpolate
+	pip install git+https://github.com/kjelljorner/polanyi
+
+	# install chembed
+	conda install lightning -c conda-forge -y
+	pip install selfies pandas scikit-learn pyarrow fastparquet rdkit chembl_structure_pipeline
+	pip install /opt/chembed
+
+    # Create data dir and set permissions
+    mkdir -p /data
+    chmod 777 /benchmark/tartarus/data/qvina
+    chmod 777 /benchmark/tartarus/data/smina
+
+%files
+    . /benchmark
+	/home/hugo/chembed /opt/chembed
+
+%environment
+    # This runs every time the container is launched
+	eval "$(conda shell.bash hook)"
+    conda activate tartarus_chembed
+    #export XTBHOME=$CONDA_PREFIX
+    bash -c "source $CONDA_PREFIX/share/xtb/config_env.bash"
