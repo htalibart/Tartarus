@@ -24,6 +24,10 @@ def check_fitness_ok():
 
 
 if __name__=="__main__":
+
+	print("environment:")
+	print(os.environ)
+
 	start = time.time()
 	check_fitness_ok()
 	end = time.time()
