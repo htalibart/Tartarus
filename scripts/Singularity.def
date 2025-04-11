@@ -18,7 +18,7 @@ From: continuumio/miniconda3:latest
 	conda activate tartarus_chembed
 	conda install python=3.8 -y
 	conda install -c pytorch pytorch -y
-	conda install -c conda-forge rdkit openbabel -y
+	conda install -c conda-forge rdkit openbabel=3.1.1 -y
 	conda install -c conda-forge xtb-python -y
 	conda install xtb==6.3.3 -y
 	conda install -c conda-forge crest -y
