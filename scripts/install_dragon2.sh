@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=create_venv
+#SBATCH --job-name=install_tartarus
 #SBATCH --time=01:00:00 # hh:mm:ss
 #
 #SBATCH --ntasks=1
@@ -20,7 +20,7 @@ module load cuDNN/8.9.2.26-CUDA-12.1.1
 
 pip install virtualenv
 
-venv_dir=/home/users/h/t/htalibar/venv
+venv_dir=/CECI/home/ulb/3bio/htalibar/venv
 venv_name=tartarus_env
 
 virtualenv --system-site-packages ${venv_dir}/${venv_name}
@@ -28,7 +28,7 @@ source ${venv_dir}/${venv_name}/bin/activate
 
 pip install torch torchvision torchaudio
 pip install lightning
-pip install rdkit openbabel==3.1.1
+pip install rdkit openbabel==3.1.1.1
 
 
 # additional packages
@@ -46,7 +46,7 @@ pip install /home/users/h/t/htalibar/chembed
 
 
 # xtb
-cd /home/users/h/t/htalibar/soft
+cd /CECI/home/ulb/3bio/htalibar
 git clone https://github.com/grimme-lab/xtb-python
 pip install cffi numpy meson ninja
 meson setup build --prefix=$HOME/.local
