@@ -4,12 +4,13 @@
 #
 #SBATCH --ntasks=1
 #SBATCH --mem-per-cpu=5120 # 5GB
-#SBATCH --partition=batch,long
+#SBATCH --partition=gpu
+#SBATCH --gres="gpu:1"
 #
 #SBATCH --mail-user=hugo.talibart@ulb.be
 #SBATCH --mail-type=ALL
 #
-#SBATCH --output=logs/output_fitness.out
+#SBATCH --output=logs/output_fitness_%x.out
 
-singularity exec tartarus_singularity.sif python /benchmark/fitness_test.py
-singularity exec tartarus_singularity.sif python /benchmark/cuda_test.py
+singularity exec tartarus_singularity.sif python /benchmark/scripts/fitness_test.py
+singularity exec tartarus_singularity.sif python /benchmark/scripts/cuda_test.py
