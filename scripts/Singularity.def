@@ -44,13 +44,16 @@ From: continuumio/miniconda3:latest
 	pip install selfies pandas scikit-learn pyarrow fastparquet rdkit chembl_structure_pipeline
 	pip install /opt/chembed
 
+	# install tartarus
+	pip install /benchmark
+
     # Create data dir and set permissions
     mkdir -p /data
     chmod 777 /benchmark/tartarus/data/qvina
     chmod 777 /benchmark/tartarus/data/smina
 
 %files
-    . /benchmark
+    /home/hugo/Tartarus /benchmark
 	/home/hugo/chembed /opt/chembed
 
 %environment
