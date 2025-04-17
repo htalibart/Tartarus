@@ -64,12 +64,12 @@ def get_properties(smile, verbose=False, scratch: str='/tmp'):
     # Run the preliminary xtb: 
     command_pre = 'CHARGE={};xtb {} --gfn 0 --opt normal -c $CHARGE --iterations 4000'.format(charge, 'test.xyz')
     system(command_pre)
-    system("rm ./gfnff_charges ./gfnff_topo")
+    #system("rm ./gfnff_charges ./gfnff_topo")
 
     # Run crest conformer ensemble
     command_crest = 'CHARGE={};crest {} -gff -mquick -chrg $CHARGE --noreftopo'.format(charge, 'xtbopt.xyz')
     system(command_crest)
-    system('rm ./gfnff_charges ./gfnff_topo')
+    #system('rm ./gfnff_charges ./gfnff_topo')
     system('head -n {} crest_conformers.xyz > crest_best.xyz'.format(atom_number+2))
 
     # Run the calculation: 
