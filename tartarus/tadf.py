@@ -153,7 +153,8 @@ class molecule:
 				energies.append(self.xtb_energy(self.file))
 				sp.run(['mv', self.file, 'rdkit.xyz'], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
 			except:
-				energies.append(10000.)
+				raise RuntimeError("could not generate rdkit 3D coordinates: molecule is probably bad")
+				#energies.append(10000.)
 			# both geometries failed
 			if energies[0] == 10000. and energies[1] == 10000.:
 				print("ERROR: could not generate xyz coordinates for molecule %s from file. Exiting."%(self.smiles))
