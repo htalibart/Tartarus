@@ -148,6 +148,7 @@ def get_properties(smile, verbose=False, scratch: str='/tmp'):
 		return pce_pcbm_sas, pce_pcdtbt_sas
 
 	except Exception as e:
+		os.chdir(owd)
 		print(e)
 		return -10000, -10000
 
