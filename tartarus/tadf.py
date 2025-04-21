@@ -239,7 +239,11 @@ class computation:
 	def clean_files(self, thorough=True):
 		# Clean files
 		if thorough == True:
-			sp.run(['rm', 'bondlengths', 'charges', 'coord', 'coord.original', 'cregen_0.tmp', 'cregen_1.tmp', 'cre_members', 'crest_best.xyz', 'crest_conformers.xyz', 'crest.energies', 'crest_rotamers.xyz', 'gfnff_charges', 'gfnff_topo', '.history.xyz', 'struc.xyz', 'wbo', 'xtbopt.log', '.xtboptok', 'xtbrestart', 'xtbtopo.mol', 'xtblast.xyz'], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+			for filename in ['bondlengths', 'charges', 'coord', 'coord.original', 'cregen_0.tmp', 'cregen_1.tmp', 'cre_members', 'crest_best.xyz', 'crest_conformers.xyz', 'crest.energies', 'crest_rotamers.xyz', 'gfnff_charges', 'gfnff_topo', '.history.xyz', 'struc.xyz', 'wbo', 'xtbopt.log', '.xtboptok', 'xtbrestart', 'xtbtopo.mol', 'xtblast.xyz']:
+				try:
+					sp.run(['rm', filename, stdout=sp.DEVNULL, stderr=sp.DEVNULL)
+				except Exception as e:
+					print(e)
 		elif thorough == False:
 			sp.run(['rm', 'gfnff_charges', 'gfnff_topo'], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
 		return
