@@ -338,8 +338,9 @@ def run_reaction(
     failed = False
     try: 
         activation_energy, reaction_energy, smiles_stereo = barrier_from_smiles(smiles)
-    except Exception:
+    except Exception as e:
         print('Reactivity simulation has failed for this molecule.')
+        print(e)
         failed = True
         smiles_stereo = None
         activation_energy = 10**4
@@ -409,7 +410,7 @@ def substructure_violations(mol):
     return violation
 
     
-def get_properties(smi: str, verbose: bool = False, n_procs: int = 1): 
+def get_properties(smi: str, verbose: bool = False, n_procs: int = 1, scratch='/tmp'): 
     '''Return fitness functions for the design of OPV molecules.
 
     :param smi: `str` representing molecule
@@ -432,7 +433,7 @@ def get_properties(smi: str, verbose: bool = False, n_procs: int = 1):
         return 10**4, 10**4, 10**4, 10**4
     
     # Normal calculation can procedd (no fitness violations): 
-    smiles_stereo, activation_energy, reaction_energy, sa_score, run_time = run_reaction(smi, n_procs=n_procs)
+    smiles_stereo, activation_energy, reaction_energy, sa_score, run_time = run_reaction(smi, n_procs=n_procs, scratch=scratch)
 
     # assign values
     Ea = activation_energy
