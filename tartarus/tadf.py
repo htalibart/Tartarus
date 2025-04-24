@@ -241,7 +241,7 @@ class computation:
 		if thorough == True:
 			for filename in ['bondlengths', 'charges', 'coord', 'coord.original', 'cregen_0.tmp', 'cregen_1.tmp', 'cre_members', 'crest_best.xyz', 'crest_conformers.xyz', 'crest.energies', 'crest_rotamers.xyz', 'gfnff_charges', 'gfnff_topo', '.history.xyz', 'struc.xyz', 'wbo', 'xtbopt.log', '.xtboptok', 'xtbrestart', 'xtbtopo.mol', 'xtblast.xyz']:
 				try:
-					sp.run(['rm', filename, stdout=sp.DEVNULL, stderr=sp.DEVNULL])
+					sp.run(['rm', filename], stdout=sp.DEVNULL, stderr=sp.DEVNULL)
 				except Exception as e:
 					print(e)
 		elif thorough == False:
