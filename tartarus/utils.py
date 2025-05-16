@@ -8,7 +8,7 @@ from subprocess import DEVNULL, Popen, PIPE
 def suppress_output(verbose):
 	"""Suppress output when """
 	if verbose:
-		pass
+		yield
 	else:
 		with open(devnull, 'w') as fnull:
 			with redirect_stderr(fnull) as err, redirect_stdout(fnull) as out:
