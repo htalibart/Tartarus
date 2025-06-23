@@ -69,7 +69,7 @@ def run_docking_1syh(lig_location, out_location, method='qvina'):
 	if method == 'qvina': 
 		command_run = subprocess.run([QVINA_CMD, "--receptor", get_structure_file("1syh"), "--ligand", lig_location, "--center_x", "21.492800140380858", "--center_y", "13.457733376820881", "--center_z", "23.175899950663247", "--size_x", "20", "--size_y", "20", "--size_z", "20", "--exhaustiveness", "10", "--out", out_location], capture_output=True)
 	elif method == 'smina': 
-		command_run = subprocess.run([SMINA_CMD, "--receptor", get_structure_file("1ysh"), "--ligand", lig_location, "--center_x", "21.492800140380858", "--center_y", "13.457733376820881", "--center_z", "23.175899950663247", "--size_x", "20", "--size_y", "20", "--size_z", "20", "--exhaustiveness", "100", "--out", out_location], capture_output=True)
+		command_run = subprocess.run([SMINA_CMD, "--receptor", get_structure_file("1syh"), "--ligand", lig_location, "--center_x", "21.492800140380858", "--center_y", "13.457733376820881", "--center_z", "23.175899950663247", "--size_x", "20", "--size_y", "20", "--size_z", "20", "--exhaustiveness", "100", "--out", out_location], capture_output=True)
 	else: 
 		raise Exception('Possible docking softwares: qvina/smina')
 
