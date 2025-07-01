@@ -238,7 +238,7 @@ def perform_calc_single(smi, receptor_type, docking_program='qvina', filter_mole
 	try: 
 		if filter_molecules:
 			pass_filt =  process_molecule(smi)
-			if pass_filt[1] == 'Fail': 
+			if pass_filt[1] == 'FAIL': 
 				return 10**4
 	
 		output_filename = generate_unique_file_name('lig', 'pdbqt')
